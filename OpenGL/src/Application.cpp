@@ -76,8 +76,8 @@ int main()
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
     glEnableVertexAttribArray(0);
-    int success; char infoLog[512];
-    int vertexShader=glCreateShader(GL_VERTEX_SHADER);
+
+    unsigned int vertexShader=glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader,1,&vertexSource,nullptr);
     glCompileShader(vertexShader);
     
@@ -85,7 +85,7 @@ int main()
     glShaderSource(fragmentShader, 1, &fragmentSource, nullptr);
     glCompileShader(fragmentShader);
    
-    int program = glCreateProgram();
+    unsigned int program = glCreateProgram();
     glAttachShader(program,vertexShader);
     glAttachShader(program, fragmentShader);
     glLinkProgram(program);
