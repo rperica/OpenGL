@@ -59,6 +59,7 @@ unsigned int Shader::CompileShader(int type)
 		{
 			const char* vertexSource = m_VertexSource.c_str();
 			glShaderSource(id, 1, &vertexSource, nullptr);
+			glCompileShader(id);
 			name = "VERTEX";
 			break;
 		}
@@ -66,6 +67,7 @@ unsigned int Shader::CompileShader(int type)
 		{
 			const char* fragmentSource = m_FragmentSource.c_str();
 			glShaderSource(id, 1, &fragmentSource, nullptr);
+			glCompileShader(id);
 			name = "FRAGMENT";
 			break;
 		}
