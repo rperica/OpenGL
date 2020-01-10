@@ -4,25 +4,13 @@
 #include <iostream>
 #include <string>
 
+#include "Shader.h"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
-const char* vertexSource =
-"#version 330 core\n"
-"layout (location=0) in vec3 positions;\n"
-"void main() {\n"
-"gl_Position=vec4(positions,1.0);\n"
-"}\0";
-
-const char* fragmentSource =
-"#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main() {\n"
-"FragColor=vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-"}\0";
 
 int main()
 {
@@ -77,24 +65,9 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
     glEnableVertexAttribArray(0);
 
-    unsigned int vertexShader=glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader,1,&vertexSource,nullptr);
-    glCompileShader(vertexShader);
-    
-    int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentSource, nullptr);
-    glCompileShader(fragmentShader);
-   
-    unsigned int program = glCreateProgram();
-    glAttachShader(program,vertexShader);
-    glAttachShader(program, fragmentShader);
-    glLinkProgram(program);
-    glValidateProgram(program);
-    glUseProgram(program);
+    Shader shader("res/shaders/VertexShader.glsl","res/shaders/FragmentShader.glsl");
+    shader.Bind();
 
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-   
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
