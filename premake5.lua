@@ -16,7 +16,8 @@ project "OpenGL"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
-        "%{prj.name}/src/**.c"
+        "%{prj.name}/src/**.c",
+        "%{prj.name}/res/shaders/**.glsl"
     }
 
     includedirs
