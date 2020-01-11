@@ -45,6 +45,15 @@ void Shader::CreateShader()
 	glLinkProgram(m_RenderID);
 	glValidateProgram(m_RenderID);
 
+	int success;
+	glGetProgramiv(m_RenderID, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		char infolog[512];
+		glGetProgramInfoLog(m_RenderID, 512, nullptr, infolog);
+		std::cerr << "PROGRAM ERROR: " << infolog << std::endl;
+	}
+
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 }
@@ -74,11 +83,10 @@ unsigned int Shader::CompileShader(int type)
 	}
 	
 	int success;
-	char infolog[512];
-
 	glGetShaderiv(id, GL_COMPILE_STATUS, &success);
 	if (!success)
 	{
+		char infolog[512];
 		glGetShaderInfoLog(id, 512, nullptr, infolog);
 		std::cerr << "SHADER ERROR: " << name << " -----------  " << infolog << std::endl;
 	}
