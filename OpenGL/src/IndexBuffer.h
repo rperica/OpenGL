@@ -12,5 +12,5 @@ public:
 	void Bind() const;
 	void UnBind() const;
 
-	inline unsigned int GetCount() const { return m_RenderID; }
+	inline unsigned int GetCount() const { return m_Count; }
 };
