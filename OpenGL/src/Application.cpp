@@ -9,6 +9,8 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 
+#include "Renderer.h"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -59,13 +61,14 @@ int main()
     Shader shader("res/shaders/VertexShader.glsl","res/shaders/FragmentShader.glsl");
     shader.Bind();
 
+    Renderer render;
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_INT, nullptr);
+        render.Clear();
+        render.Draw(va,ib,shader);
+ 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
