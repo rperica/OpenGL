@@ -35,7 +35,6 @@ Shader::~Shader()
 
 void Shader::CreateShader() 
 {
-
 	unsigned int vertexShader = CompileShader(GL_VERTEX_SHADER);
 	unsigned int fragmentShader = CompileShader(GL_FRAGMENT_SHADER);
 
@@ -103,3 +102,4 @@ void Shader::Unbind() const
 {
 	glUseProgram(0);
 }
+
