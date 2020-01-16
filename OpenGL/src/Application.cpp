@@ -8,6 +8,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
+#include "Texture.h"
 
 #include "Renderer.h"
 
@@ -40,42 +41,46 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-
-    float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f,  0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-        -0.5f,  0.5f, 0.0f,
-    };
-
-    unsigned int indices[] = {
-        0,1,2,
-        0,3,1,
-    };
-
-    VertexArray va;
-    VertexBuffer vb(vertices, sizeof(vertices));
-    IndexBuffer ib(indices,6);
-    va.AddBuffer(vb);
-
-    Shader shader("res/shaders/VertexShader.glsl","res/shaders/FragmentShader.glsl");
-    shader.Bind();
-
-    Renderer render;
-    while (!glfwWindowShouldClose(window))
     {
-        processInput(window);
+        float vertices[] = {
+            //vertices          //TextCor
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+             0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+             0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+        };
 
-        render.Clear();
-        render.Draw(va,ib,shader);
- 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        unsigned int indices[] = {
+            0,1,2,
+            0,3,1,
+        };
+
+        VertexArray va;
+        VertexBuffer vb(vertices, sizeof(vertices));
+        IndexBuffer ib(indices, 6);
+        va.AddBuffer(vb);
+
+        Shader shader("res/shaders/VertexShader.glsl", "res/shaders/FragmentShader.glsl");
+        shader.Bind();
+
+        Texture texture("res/textures/container.jpg");
+        texture.Bind();
+
+        Renderer render;
+        while (!glfwWindowShouldClose(window))
+        {
+            processInput(window);
+
+            render.Clear();
+            render.Draw(va, ib, shader);
+
+            glfwSwapBuffers(window);
+            glfwPollEvents();
+        }
     }
 
     glfwTerminate();
-    
-	return 0;
+    return 0;
 }
 
 void processInput(GLFWwindow* window)
