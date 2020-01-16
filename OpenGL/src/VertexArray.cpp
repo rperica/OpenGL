@@ -1,4 +1,4 @@
-#include "VertexArray.h"
+   #include "VertexArray.h"
 #include "glad/glad.h"
 
 VertexArray::VertexArray()
@@ -20,13 +20,16 @@ void VertexArray::Bind() const
 void VertexArray::UnBind() const
 {
 	glBindVertexArray(0);
-}
+}   
 
 void VertexArray::AddBuffer(const VertexBuffer& vb)
 {
 	Bind();
 	vb.Bind();
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,5*sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,5*sizeof(float), (void*)(3*sizeof(float)));
+	glEnableVertexAttribArray(1);
 }
