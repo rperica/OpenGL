@@ -17,13 +17,16 @@ project "OpenGL"
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
         "%{prj.name}/src/**.c",
+        "%{prj.name}/src/vendor/stb_image/**.h",
+        "%{prj.name}/src/vendor/stb_image/**.c",
         "%{prj.name}/res/shaders/**.glsl"
     }
 
     includedirs
     {
         "%{prj.name}/src",
-         "Depend/Include"
+        "%{prj.name}/src/vendor",
+        "Depend/Include"
 	}
 
     libdirs
