@@ -12,6 +12,9 @@
 
 #include "Renderer.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -70,6 +73,11 @@ int main()
         while (!glfwWindowShouldClose(window))
         {
             processInput(window);
+            
+            glm::mat4 model = glm::mat4(1.0f);     
+            model = glm::rotate(model,(float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+            glm::mat4 mvp = model;
+            shader.SetUniform4x4("u_MVP", mvp);
 
             render.Clear();
             render.Draw(va, ib, shader);
