@@ -19,6 +19,8 @@ project "OpenGL"
         "%{prj.name}/src/**.c",
         "%{prj.name}/src/vendor/stb_image/**.h",
         "%{prj.name}/src/vendor/stb_image/**.c",
+        "%{prj.name}/src/vendor/glm/**.hpp",
+        "%{prj.name}/src/vendor/glm/**.inl",
         "%{prj.name}/res/shaders/**.glsl"
     }
 
