@@ -24,10 +24,10 @@ void Camera::UpdateCamera()
 	direction.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
 	direction.y = sin(glm::radians(m_pitch));
 	direction.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-
+	
 	m_Direction = glm::normalize(direction);
-	m_Right = glm::cross(m_Direction, m_WorldUp);
-	m_Up = glm::cross(m_Right, m_Direction);
+	m_Right = glm::normalize(glm::cross(m_Direction, m_WorldUp));
+	m_Up = glm::normalize(glm::cross(m_Right, m_Direction));
 }
 
 void Camera::KeyboardInput(cameraMovement moveDirection,float deltaTime)
@@ -38,9 +38,9 @@ void Camera::KeyboardInput(cameraMovement moveDirection,float deltaTime)
 	else if (moveDirection == BACKWARD)
 		m_Position -= m_Direction * velocity;
 	else if (moveDirection == LEFT)
-		m_Position += m_Right * velocity;
-	else if (moveDirection == RIGHT)
 		m_Position -= m_Right * velocity;
+	else if (moveDirection == RIGHT)
+		m_Position += m_Right * velocity;
 }
 
 void Camera::MouseProcess(float xoffset, float yoffset, bool constrainPitch)
@@ -62,7 +62,22 @@ void Camera::MouseProcess(float xoffset, float yoffset, bool constrainPitch)
 	UpdateCamera();
 }
 
-void Camera::ScrollProcess()
+void Camera::ScrollProcess(float yoffset)
 {
-	//In development...
+	if (m_zoom >= 1.0f && m_zoom <= 45.0f)
+		m_zoom -= yoffset;
+	if (m_zoom <= 1.0f)
+		m_zoom = 1.0f;
+	if (m_zoom >= 45.0f)
+		m_zoom = 45.0f;
+}
+
+glm::vec3 Camera::GetPosition()
+{
+	return m_Position;
+}
+
+float Camera::GetZoom()
+{
+	return m_zoom;
 }
