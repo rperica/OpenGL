@@ -17,6 +17,8 @@ project "OpenGL"
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
         "%{prj.name}/src/**.c",
+        "%{prj.name}/src/**.inl",
+        "%{prj.name}/src/**.hpp",
         "%{prj.name}/src/vendor/stb_image/**.h",
         "%{prj.name}/src/vendor/stb_image/**.c",
         "%{prj.name}/src/vendor/glm/**.hpp",
@@ -33,13 +35,14 @@ project "OpenGL"
 
     libdirs
     {
-         "Depend/Libraries"
+         "Depend/Libraries",
 	}
 
     links
     {
         "opengl32.lib",
-        "glfw3.lib"
+        "glfw3.lib",
+        "assimp-vc142-mtd.lib"
 	}
 
     filter "system:windows"
