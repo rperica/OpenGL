@@ -72,12 +72,3 @@ void Camera::ScrollProcess(float yoffset)
 		m_zoom = 45.0f;
 }
 
-glm::vec3 Camera::GetPosition()
-{
-	return m_Position;
-}
-
-float Camera::GetZoom()
-{
-	return m_zoom;
-}

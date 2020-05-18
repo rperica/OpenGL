@@ -42,6 +42,9 @@ public:
 	void KeyboardInput(cameraMovement moveDirection,float deltaTime);
 	void MouseProcess(float xoffset,float yoffset,bool constrainPitch=true);
 	void ScrollProcess(float yoffset);
-	glm::vec3 GetPosition();
-	float GetZoom();
+
+	inline const glm::vec3& GetPosition() const { return m_Position; }
+	inline const glm::vec3& GetFront() const { return m_Direction; }
+	inline const glm::vec3& GetUP() const { return m_WorldUp; }
+	inline const float& GetZoom()const { return m_zoom; }
 };
