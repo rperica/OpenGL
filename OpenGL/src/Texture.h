@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include<vector>
 #include "vendor/stb_image/stb_image.h"
 
 class Texture
@@ -12,8 +13,14 @@ private:
 
 public:
 	Texture(const std::string& path);
+	Texture();
+	Texture(const int& width,const int& height);
+	Texture(const std::vector<std::string>& faces);
+
 	~Texture();
 
 	void Bind(unsigned int slot=0) const;
 	void UnBind() const;
+
+	void BindCubeMap() const;
 };
