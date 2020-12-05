@@ -45,6 +45,11 @@ project "OpenGL"
         "assimp-vc142-mtd.lib"
 	}
 
+    postbuildcommands
+    {
+       "{COPY} %{wks.location}Depend/Libraries/assimp-vc142-mtd.dll %{cfg.targetdir}"
+    }
+
     filter "system:windows"
         cppdialect "c++17"
         systemversion "latest"
